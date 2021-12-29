@@ -32,14 +32,14 @@ export abstract class ReactHook<Args extends any[], State extends {}, Return> {
 	abstract render(): Return;
 
 	/* tslint:disable:no-empty */
-	hookWillMount() {}
-	hookDidMount() {}
-	hookWillUpdate(nextArgs: Args, nextState: State) {}
-	hookDidUpdate(prevArgs: Args, prevState: State) {}
-	hookWillUnmount() {}
+	protected hookWillMount() {}
+	protected hookDidMount() {}
+	protected hookWillUpdate(nextArgs: Args, nextState: State) {}
+	protected hookDidUpdate(prevArgs: Args, prevState: State) {}
+	protected hookWillUnmount() {}
 	/* tslint:enable:no-empty */
 
-	getDerivedStateFromArgs(
+	protected getDerivedStateFromArgs(
 		this: {},
 		nextArgs: Args,
 		prevState: State
@@ -53,23 +53,24 @@ export abstract class ReactHook<Args extends any[], State extends {}, Return> {
 	private _didMountRan: boolean = false;
 	private _updateCallbacks: Callback[] = [];
 	private _updater: () => void = () => undefined;
-	_beforeFirstRender(updater: Rerender) {
+	__internal_beforeFirstRender(updater: Rerender) {
 		this._updater = () => updater(increment);
 		this.hookWillMount();
 	}
-	_beforeSubsequentRender(nextArgs: Args) {
+	__internal_beforeSubsequentRender(nextArgs: Args) {
 		this.hookWillUpdate(nextArgs, this._nextState);
 		this._prevArgs = this.args;
 		this._prevState = this.state;
 		this.args = nextArgs;
 		this.state = this._nextState;
 	}
-	_deriveStateAndRender(): Return {
+	__internal_deriveStateAndRender(): Return {
 		const derived = this.getDerivedStateFromArgs(this.args, this.state);
 		if (derived) this.state = { ...this.state, ...derived };
 		return this.render();
 	}
-	_afterRender = (): void => {
+	/* tslint:disable-next-line:variable-name */
+	__internal_afterRender = (): void => {
 		if (!this._didMountRan) {
 			this._didMountRan = true;
 			this.hookDidMount();
@@ -78,7 +79,8 @@ export abstract class ReactHook<Args extends any[], State extends {}, Return> {
 		}
 		while (this._updateCallbacks.length) this._updateCallbacks.pop()?.();
 	};
-	_unmountEffect = (): (() => void) => {
+	/* tslint:disable-next-line:variable-name */
+	__internal_unmountEffect = (): (() => void) => {
 		return this.hookWillUnmount.bind(this);
 	};
 }
@@ -100,16 +102,16 @@ export function createHook<Args extends any[], State extends {}, Return>(
 		if (!instanceRef.current) {
 			instance = new Class(args);
 			instanceRef.current = instance;
-			instance._beforeFirstRender(rerender);
+			instance.__internal_beforeFirstRender(rerender);
 		} else {
 			instance = instanceRef.current;
-			instance._beforeSubsequentRender(args);
+			instance.__internal_beforeSubsequentRender(args);
 		}
 
-		const result = instance._deriveStateAndRender();
+		const result = instance.__internal_deriveStateAndRender();
 
-		useLayoutEffect(instance._afterRender);
-		useLayoutEffect(instance._unmountEffect, EMPTY_DEPS);
+		useLayoutEffect(instance.__internal_afterRender);
+		useLayoutEffect(instance.__internal_unmountEffect, EMPTY_DEPS);
 		return result;
 	};
 }
