@@ -63,7 +63,7 @@ class UseLifecycleTest extends ReactHook<Args, State, Return> {
 }
 const useLifecycleTest = createHook(UseLifecycleTest);
 test('mounting', () => {
-	let tracker: MutLifecycleTracker = [];
+	const tracker: MutLifecycleTracker = [];
 	const { result, rerender } = renderHook(() => useLifecycleTest(3, tracker));
 	expect(tracker).toEqual<MutLifecycleTracker>([
 		'constructor',
@@ -74,7 +74,7 @@ test('mounting', () => {
 	]);
 });
 test('updating', () => {
-	let tracker: MutLifecycleTracker = [];
+	const tracker: MutLifecycleTracker = [];
 	const { result, rerender } = renderHook(
 		({ num }) => useLifecycleTest(num, tracker),
 		{
@@ -102,7 +102,7 @@ test('updating', () => {
 	expect(tracker).toEqual<MutLifecycleTracker>(expected);
 });
 test('unmounting', () => {
-	let tracker: MutLifecycleTracker = [];
+	const tracker: MutLifecycleTracker = [];
 	const { result, rerender, unmount } = renderHook(
 		({ num }) => useLifecycleTest(num, tracker),
 		{
