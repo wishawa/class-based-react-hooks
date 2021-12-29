@@ -1,8 +1,8 @@
 {
-	"name": "react-class-hooks",
+	"name": "class-based-react-hooks",
 	"version": "0.1.0",
-	"description": "Create React hooks with classes",
-	"main": "main/index.ts",
+	"description": "Create React hooks using classes - with hookDidMount, hookWillUpdate, etc.",
+	"main": "src/index.ts",
 	"scripts": {
 		"build": "tsc",
 		"format": "prettier --write \"src/**/*.ts\"",
