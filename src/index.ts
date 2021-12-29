@@ -75,7 +75,7 @@ export abstract class ReactHook<Args extends any[], State extends {}, Return> {
 			this._didMountRan = true;
 			this.hookDidMount();
 		} else {
-			this.hookDidUpdate(this._prevArgs as Args, this._prevState as State);
+			this.hookDidUpdate(this._prevArgs, this._prevState);
 		}
 		while (this._updateCallbacks.length) this._updateCallbacks.pop()?.();
 	};
