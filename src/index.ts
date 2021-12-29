@@ -6,6 +6,7 @@ type Callback = () => void;
 function increment(num: number): number {
 	return num + 1;
 }
+
 export abstract class ReactHook<Args extends any[], State extends {}, Return> {
 	constructor(args: Args, state: State) {
 		this.args = args;
@@ -21,15 +22,15 @@ export abstract class ReactHook<Args extends any[], State extends {}, Return> {
 		this._updater();
 		if (callback) this._updateCallbacks.push(callback);
 	}
-	protected setState(update: Partial<State>) {
+	protected setState(update: Partial<State>, callback?: Callback) {
 		this._nextState = {
 			...this._nextState,
 			...update,
 		};
-		this.forceUpdate();
+		this.forceUpdate(callback);
 	}
 
-	abstract render(): Return;
+	protected abstract render(): Return;
 
 	/* tslint:disable:no-empty */
 	protected hookWillMount() {}
