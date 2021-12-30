@@ -2,7 +2,8 @@
 	"name": "class-based-react-hooks",
 	"version": "0.1.0",
 	"description": "Create React hooks using classes - with hookDidMount, hookWillUpdate, etc.",
-	"main": "src/index.ts",
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
 	"scripts": {
 		"build": "tsc",
 		"format": "prettier --write \"src/**/*.ts\"",
@@ -16,6 +17,7 @@
 	},
 	"author": "Wisha Wanichwecharungruang <wisha.wa@yandex.com>",
 	"license": "MPL-2.0",
+	"keywords": ["React", "Hook", "Class", "Lifecycle"],
 	"devDependencies": {
 		"@babel/preset-env": "^7.16.5",
 		"@babel/preset-react": "^7.16.5",
