@@ -1,5 +1,7 @@
 # Class-Based React Hooks
 
+[<img alt="npm" src="https://img.shields.io/npm/v/class-based-react-hooks?style=for-the-badge" height="20">](https://www.npmjs.com/package/class-based-react-hooks)
+
 Create React hooks using classes - with `hookDidMount`, `hookWillUpdate`, etc.
 
 ## Examples
