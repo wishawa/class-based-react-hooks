@@ -50,7 +50,7 @@ class UseMiniSWR<Data, Key> extends ReactHook<
 			this._fetchData(nextArgs[0]);
 		}
 	}
-	_mutate = (newData?: Data, shouldRevalidate?: boolean) => {
+	_mutate = (newData?: Data, shouldRevalidate: boolean = true) => {
 		const update: Partial<State<Data>> = {};
 		if (newData) {
 			update.data = newData;
