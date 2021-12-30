@@ -4,6 +4,8 @@ Create React hooks using classes - with `hookDidMount`, `hookWillUpdate`, etc.
 
 ## Examples
 
+[See demos on CodeSandbox](https://codesandbox.io/s/class-based-react-hooks-demo-2nz7j).
+
 ### `useCounter`
 
 ```tsx
@@ -183,6 +185,8 @@ function MyComponent() {
 ```
 
 ## API
+
+This library is typed with TypeScript. Usage with TypeScript is strongly recommended.
 
 ### `ReactHook`
 
