@@ -229,7 +229,7 @@ abstract class ReactHook<Args extends any[], State extends {}, Return> {
 	protected hookWillMount(): void {}
 
 	/// Called after the first `render()` is all finished - the same time as `componentDidMount`.
-	protected hookDidMount(): void; {}
+	protected hookDidMount(): void {}
 	
 	/// Called just before `render()`. Not called for the first render.
 	/// This method is called even if the args and state remains the same so you must perform comparison yourself.
