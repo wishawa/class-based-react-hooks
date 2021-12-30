@@ -115,4 +115,12 @@ test('mutate', async () => {
 	expect(result.current.data).toBe('Hi!');
 	await waitForNextUpdate();
 	expect(result.current.data).toBe('Hello, World!');
+	act(() => {
+		result.current.mutate();
+	});
+	expect(result.current.data).toBe('Hello, World!');
+	expect(result.current.isValidating).toBe(true);
+	await waitForNextUpdate();
+	expect(result.current.data).toBe('Hello, World!');
+	expect(result.current.isValidating).toBe(false);
 });
