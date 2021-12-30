@@ -18,6 +18,7 @@
 	"author": "Wisha Wanichwecharungruang <wisha.wa@yandex.com>",
 	"license": "MPL-2.0",
 	"keywords": ["React", "Hook", "Class", "Lifecycle"],
+	"repository": "github:wishawa/class-based-react-hooks",
 	"devDependencies": {
 		"@babel/preset-env": "^7.16.5",
 		"@babel/preset-react": "^7.16.5",
