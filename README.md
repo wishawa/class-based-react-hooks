@@ -145,7 +145,7 @@ class UseMiniSWR<Data, Key> extends ReactHook<
 			this._fetchData(nextArgs[0]);
 		}
 	}
-	_mutate = (newData?: Data, shouldRevalidate?: boolean) => {
+	_mutate = (newData?: Data, shouldRevalidate: boolean = true) => {
 		const update: Partial<State<Data>> = {};
 		if (newData) {
 			update.data = newData;
@@ -166,7 +166,7 @@ class UseMiniSWR<Data, Key> extends ReactHook<
 }
 const useMiniSWR = createHook(UseMiniSWR);
 
-async function fetcher(uri: string): string {
+async function fetcher(uri: string): Promise<string> {
 	const resp = await fetch(uri);
 	return await resp.text();
 }
@@ -176,7 +176,7 @@ function MyComponent() {
 		<div>
 			{isValidating && <span>Loading...</span>}
 			{!!data && <span>{data}</span>}
-			<button onClick={() => mutate()}>refresh</mutate>
+			<button onClick={() => mutate()}>refresh</button>
 		</div>
 	);
 }
